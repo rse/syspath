@@ -47,30 +47,30 @@ syspath({
 }
 ```
 
-The `appName` is the name of the application. By default this is
-`path.basename(process.argv[1]).replace(/\.[^.]+$/, "")`.
+- The `appName` is the name of the application. By default this is
+  `path.basename(process.argv[1]).replace(/\.[^.]+$/, "")`.
 
-The `dataDirMode` is the numerical filesystem mode used for creating the
-`dataDir` (if still not existing and `dataDirAutoCreate` is `true`). The
-default is `parseInt("0755", 8) & ~process.umask()`.
+- The `dataDirMode` is the numerical filesystem mode used for creating the
+  `dataDir` (if still not existing and `dataDirAutoCreate` is `true`). The
+  default is `parseInt("0755", 8) & ~process.umask()`.
 
-The `dataDirAutoCreate` forces the automatic creation of the `dataDir`
-(if still not existing, which is usually the case on the initial usage).
-By default this is `true`.
+- The `dataDirAutoCreate` forces the automatic creation of the `dataDir`
+  (if still not existing, which is usually the case on the initial usage).
+  By default this is `true`.
 
-The `dataDirAutoRemove` forces the automatic removal of the `dataDir` if
-it is still empty at the application termination time. By default this
-is `true`.
+- The `dataDirAutoRemove` forces the automatic removal of the `dataDir` if
+  it is still empty at the application termination time. By default this
+  is `true`.
 
-The `homeDir` is the resolved path to the home directory of the user
-the application is executed under. The home directory is usually
-`%USERPROFILE%` on Windows or `$HOME` on Mac OS X, Linux and FreeBSD.
+- The `homeDir` is the resolved path to the home directory of the user
+  the application is executed under. The home directory is usually
+  `%USERPROFILE%` on Windows or `$HOME` on Mac OS X, Linux and FreeBSD.
 
-The `dataDir` is the resolved path to the dedicated data directory for
-the application. The data directory is usually `%APPDATA%/<appName>` on
-Windows, `$HOME/Library/Application Support/<appName>` on Mac OS X and
-`$XDG_CONFIG_HOME/<appName>` or `$HOME/.config/<appName>` on Linux and
-FreeBSD.
+- The `dataDir` is the resolved path to the dedicated data directory for
+  the application. The data directory is usually `%APPDATA%/<appName>` on
+  Windows, `$HOME/Library/Application Support/<appName>` on Mac OS X and
+  `$XDG_CONFIG_HOME/<appName>` or `$HOME/.config/<appName>` on Linux and
+  FreeBSD.
 
 License
 -------
