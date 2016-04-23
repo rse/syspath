@@ -44,7 +44,8 @@ syspath({
 }): {
     homeDir:            string,
     dataDir:            string
-}``
+}
+```
 
 The `appName` is the name of the application. By default this is
 `path.basename(process.argv[1]).replace(/\.[^.]+$/, "")`.
