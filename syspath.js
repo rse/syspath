@@ -32,9 +32,16 @@ var mkdirp = require("mkdirp");
 
 /*  the API function  */
 module.exports = function (opts) {
+    /*  determine default application name  */
+    var appName = "unknown"
+    if (typeof process.versions.electron === "string")
+        appName = require("electron").app.getName()
+    else if (process.argv.length >= 2 && process.argv[1].match(/\.js$/))
+        appName = path.basename(process.argv[1]).replace(/\.js$/, "")
+
     /*  determine options  */
     var options = {
-        appName:           path.basename(process.argv[1]).replace(/\.[^.]+$/, ""),
+        appName:           appName,
         dataDirMode:       (parseInt("0755", 8) & ~process.umask()),
         dataDirAutoCreate: true,
         dataDirAutoRemove: true
