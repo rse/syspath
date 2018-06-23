@@ -2,7 +2,7 @@
     "name":        "syspath",
     "homepage":    "http://github.com/rse/syspath",
     "description": "System Path Determination (Home and Data Directories)",
-    "version":     "0.9.3",
+    "version":     "0.9.4",
     "license":     "MIT",
     "author": {
         "name":    "Ralf S. Engelschall",
