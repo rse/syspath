@@ -23,70 +23,70 @@
 */
 
 /*  internal requirements  */
-var os     = require("os");
-var fs     = require("fs");
-var path   = require("path");
+const os     = require("os")
+const fs     = require("fs")
+const path   = require("path")
 
 /*  external requirements  */
-var mkdirp = require("mkdirp");
+const mkdirp = require("mkdirp")
 
 /*  the API function  */
 module.exports = function (opts) {
     /*  determine default application name  */
-    var appName = "unknown"
+    let appName = "unknown"
     if (typeof process.versions.electron === "string")
         appName = require("electron").app.getName()
     else if (process.argv.length >= 2 && process.argv[1].match(/\.js$/))
         appName = path.basename(process.argv[1]).replace(/\.js$/, "")
 
     /*  determine options  */
-    var options = {
+    let options = {
         appName:           appName,
         dataDirMode:       (parseInt("0755", 8) & ~process.umask()),
         dataDirAutoCreate: true,
         dataDirAutoRemove: true
-    };
+    }
     if (typeof opts === "object")
-        Object.assign(options, opts);
+        Object.assign(options, opts)
 
     /*  determine home directory  */
-    var homeDir = "";
+    let homeDir = ""
     if (process.env.USERPROFILE)
-        homeDir = path.resolve(process.env.USERPROFILE);
+        homeDir = path.resolve(process.env.USERPROFILE)
     else if (process.env.HOME)
-        homeDir = path.resolve(process.env.HOME);
+        homeDir = path.resolve(process.env.HOME)
     else
-        homeDir = path.resolve(os.homedir());
+        homeDir = path.resolve(os.homedir())
     if (!fs.existsSync(homeDir))
-       throw new Error("home directory not found: \"" + homeDir + "\"");
+       throw new Error("home directory not found: \"" + homeDir + "\"")
 
     /*  determine data directory  */
-    var dataDir = "";
-    var platform = os.platform();
+    let dataDir = ""
+    let platform = os.platform()
     if (platform === "win32")
-        dataDir = process.env.APPDATA;
+        dataDir = process.env.APPDATA
     else if (platform === "darwin")
-        dataDir = path.join(homeDir, "Library", "Application Support");
+        dataDir = path.join(homeDir, "Library", "Application Support")
     else if (process.env.XDG_CONFIG_HOME)
-        dataDir = path.resolve(process.env.XDG_CONFIG_HOME);
+        dataDir = path.resolve(process.env.XDG_CONFIG_HOME)
     else
-        dataDir = path.join(homeDir, ".config");
-    dataDir = path.join(dataDir, options.appName);
+        dataDir = path.join(homeDir, ".config")
+    dataDir = path.join(dataDir, options.appName)
     if (!fs.existsSync(dataDir)) {
         if (options.dataDirAutoCreate) {
-            mkdirp.sync(dataDir, { mode: options.dataDirMode });
+            mkdirp.sync(dataDir, { mode: options.dataDirMode })
             if (!fs.existsSync(dataDir))
-                throw new Error("failed to auto-create data directory: \"" + dataDir + "\"");
+                throw new Error("failed to auto-create data directory: \"" + dataDir + "\"")
             if (options.dataDirAutoRemove)
                 process.on("exit", function (code) {
-                    try { fs.rmdirSync(dataDir); } catch (ex) {}
-                });
+                    try { fs.rmdirSync(dataDir) } catch (ex) {}
+                })
         }
         else
-            throw new Error("data directory not found: \"" + dataDir + "\"");
+            throw new Error("data directory not found: \"" + dataDir + "\"")
     }
 
     /*  return home and data directory  */
-    return { homeDir: homeDir, dataDir: dataDir };
-};
+    return { homeDir: homeDir, dataDir: dataDir }
+}
 
