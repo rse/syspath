@@ -21,7 +21,7 @@
     },
     "main":        "./syspath.js",
     "dependencies" : {
-        "mkdirp":  "1.0.4"
+        "mkdirp":  "2.1.5"
     },
     "engines": {
         "node":    ">=8.0.0"
