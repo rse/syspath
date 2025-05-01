@@ -23,14 +23,16 @@
 */
 
 declare module "syspath" {
-    export default function syspath({
+    type SyspathParams = {
         appName?:           string,
         dataDirMode?:       number,
         dataDirAutoCreate?: boolean,
         dataDirAutoRemove?: boolean,
-    }): {
+    }
+    type SyspathResult = {
         homeDir:            string,
         dataDir:            string
     }
+    export default function syspath(params?: SyspathParams): SyspathResult
 }
 
