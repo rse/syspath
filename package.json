@@ -20,8 +20,9 @@
         "url":     "http://github.com/rse/syspath/issues"
     },
     "main":        "./syspath.js",
+    "types":       "./syspath.d.ts",
     "dependencies" : {
-        "mkdirp":  "2.1.5"
+        "mkdirp":  "3.0.1"
     },
     "engines": {
         "node":    ">=8.0.0"
